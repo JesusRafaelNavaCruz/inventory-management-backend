@@ -10,7 +10,28 @@ async function bootstrap() {
     .setTitle('Inventory Management API')
     .setDescription('API for managing inventory assets')
     .setVersion('1.0')
-    .addBearerAuth()
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT',
+        description: 'Enter JWT token',
+        in: 'header',
+      },
+      'JWT-auth',
+    )
+    .addBearerAuth(
+      {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+        name: 'JWT-refresh',
+        description: 'Enter JWT refresh token',
+        in: 'header',
+      },
+      'JWT-refresh',
+    )
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
